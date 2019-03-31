@@ -1,12 +1,5 @@
 import random
-"""
-A = ['Andrew', 'Антон', 'Денис', 'Аня', 'Катя', 'Юля']
-B = ['Богдан', 'Віталій', 'Юля', 'Даша', 'Оля']
-S1 = {("Петро", "Ольга"), ("Іван", "Тетяна"), ("Олег", "Оксана")}
 
-mens = ['Andrew', 'Антон', 'Денис', 'Богдан', 'Віталій', 'Віктор', 'Костя', 'Сергій', 'Вова']
-women = ['Настя', 'Маша', 'Аня', 'Катя', 'Юля', 'Даша', 'Оля', 'Люда']
-"""
 
 
 def a_husbend_b(A, B, mens, women):
@@ -57,7 +50,7 @@ def a_universal_father_in_law_b(A, B, mens):
     for i in B:
         if i in mens:
             mensetB.add(i)
-    # Ur=list(map(lambda x: x * , mile_distances))
+
     Ur = []
     for m1 in mensetA:
         for m2 in mensetB:
@@ -65,18 +58,6 @@ def a_universal_father_in_law_b(A, B, mens):
                 Ur.append([m1, m2])
     return Ur
 
-
-# print(a_husbend_b())
-# print(a_father_in_law_b())
-"""
-Ur = list(a_universal_father_in_law_b())
-print("Ur > ", a_universal_father_in_law_b())
-S = list(a_husbend_b())
-print(S)
-R = list(a_father_in_law_b())
-print(R)
-
-"""
 def unionn(s, r):
     U = []
     for i in s:
@@ -87,22 +68,17 @@ def unionn(s, r):
     return U
 
 
-#print(unionn(R, S))
-
-
-# print(S)
-# print(R)
 
 def intersectionn(s, r):
     I = []
     for i in s:
-        # print(i if i in s else "0")
+
         if i in r:
             I.append(i)
     return I
 
 
-#print(intersectionn(R, S))
+
 
 
 def differ(r, s):
@@ -113,7 +89,7 @@ def differ(r, s):
     return D
 
 
-#print(differ(R, S))
+
 
 
 def transposed(s):
@@ -123,5 +99,3 @@ def transposed(s):
     return T
 
 
-#print(transposed(S))
-#5print(differ(Ur, R))
