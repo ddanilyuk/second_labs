@@ -2,20 +2,23 @@ from tkinter import *
 import pickle, random, copy
 
 
-
 class Lab2:
     A = set()
     B = set()
 
-    def student(self, n=3, g=64):
+    def __init__(self):
+        self.men = ['Андрій', 'Антон', 'Денис', 'Богдан', 'Віталій', 'Віктор', 'Костя', 'Сергій', 'Вова']
+        self.women = ['Настя', 'Маша', 'Аня', 'Катя', 'Юля', 'Даша', 'Оля', 'Люда']
+
+    def student(self, n=8, g=82):
         self.slave = Toplevel(self.root)
         self.slave.title('Student')
         self.slave.focus_set()
         self.slave.minsize(300, 100)
         self.slave.maxsize(300, 100)
         self.slave.wm_geometry("+600+250")
-        Label(self.slave, text='Бровченко Анастасія\n'
-                               'група ІО-64\n'
+        Label(self.slave, text='Данилюк Денис\n'
+                               'група ІВ-82\n'
                                'варіант {}'.format((n + g % 60) % 30 + 1),
               justify=LEFT, font="Arial 17 bold").pack(fill='both')
 
@@ -97,7 +100,6 @@ class Lab2:
         lf1 = LabelFrame(self.slave2, text="Жіночі імена", font='Arial 12')
         lf1.grid(row=3, column=0, columnspan=2)
 
-        self.women = ['Настя', 'Маша', 'Аня', 'Катя', 'Юля', 'Даша', 'Оля', 'Люда']
         listbox1 = Listbox(lf1, selectmode=EXTENDED, font='Arial 14')
         for i in self.women:
             listbox1.insert(END, i)
@@ -111,7 +113,6 @@ class Lab2:
         lf2 = LabelFrame(self.slave2, text="Чоловічі імена", font='Arial 12')
         lf2.grid(row=3, column=2, columnspan=2)
 
-        self.men = ['Андрій', 'Антон', 'Денис', 'Богдан', 'Віталій', 'Віктор', 'Костя', 'Сергій', 'Вова']
         listbox2 = Listbox(lf2, selectmode=EXTENDED, font='Arial 14')
         for i in self.men:
             listbox2.insert(END, i)
@@ -136,7 +137,7 @@ class Lab2:
         lb = Label(lf3, text='A = {}\n'
                              'B = {}\n'.format(self.A, self.B), font='Arial 14', justify=LEFT)
         lb.grid(row=6, column=0, columnspan=5, sticky=W)
-        A = self.A;
+        A = self.A
         B = self.B
 
     def window3(self):
@@ -177,8 +178,8 @@ class Lab2:
                         R.append([p, q])
             return R
 
-        self.S = A_cholovik_B()
         self.R = A_onuk_B()
+        self.S = A_cholovik_B()
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)
@@ -205,7 +206,7 @@ class Lab2:
         canvS = Canvas(self.slave3, width=600, height=200)
         dict_SA = {}
         dict_SB = {}
-        canvS.create_text(160, 30, text='Множина aSb, якщо a чоловік b', font='Arial 16')
+        canvS.create_text(160, 30, text='Множина aSb, якщо a мати b', font='Arial 16')
         for i in range(len(self.A)):
             canvS.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
             canvS.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
@@ -221,7 +222,7 @@ class Lab2:
         canvR = Canvas(self.slave3, width=600, height=200)
         dict_RA = {}
         dict_RB = {}
-        canvR.create_text(160, 30, text='Множина aRb, якщо a онук b', font='Arial 16')
+        canvR.create_text(160, 30, text='Множина aRb, якщо a онука b', font='Arial 16')
         for i in range(len(self.A)):
             canvR.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
             canvR.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
@@ -371,5 +372,5 @@ class Lab2:
         canv.grid(row=1, column=3, rowspan=6)
 
 
-Nastya = Lab2()
-Nastya.mainwindow()
+Donis = Lab2()
+Donis.mainwindow()
