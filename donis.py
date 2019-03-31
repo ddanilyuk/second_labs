@@ -11,6 +11,7 @@ class Lab2:
         self.women = ['Настя', 'Маша', 'Аня', 'Катя', 'Юля', 'Даша', 'Оля', 'Люда']
 
     def student(self, n=8, g=82):
+        self.slave = Toplevel(self.root)
         self.slave.title('Student')
         self.slave.focus_set()
         self.slave.minsize(300, 100)
@@ -23,7 +24,6 @@ class Lab2:
 
     def mainwindow(self):
         self.root = Tk()
-        self.slave = Toplevel(self.root)
         self.root.title('Window1')
         self.root.minsize(500, 200)
         self.root.maxsize(500, 200)
