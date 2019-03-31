@@ -1,5 +1,6 @@
 from tkinter import *
 import pickle, random, copy
+import nastya_vidnoshennya as vidn
 
 
 
@@ -136,13 +137,15 @@ class Lab2:
         lb = Label(lf3, text='A = {}\n'
                              'B = {}\n'.format(self.A, self.B), font='Arial 14', justify=LEFT)
         lb.grid(row=6, column=0, columnspan=5, sticky=W)
-        A = self.A;
+        A = self.A
         B = self.B
 
     def window3(self):
         self.slave3 = Toplevel(self.root)
         self.slave3.title('Window3')
         self.slave3.focus_set()
+
+        """
 
         def A_cholovik_B():
             a = set()
@@ -176,9 +179,9 @@ class Lab2:
                     if [p, q] not in R:
                         R.append([p, q])
             return R
-
-        self.S = A_cholovik_B()
-        self.R = A_onuk_B()
+"""
+        self.S = vidn.a_husbend_b()
+        self.R = vidn.a_father_in_law_b()
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)
