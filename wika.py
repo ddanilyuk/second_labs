@@ -1,5 +1,6 @@
 from tkinter import *
 import pickle, random, copy
+import wika_vidnoshennya as vidn
 
 
 
@@ -7,15 +8,15 @@ class Lab2:
     A = set()
     B = set()
 
-    def student(self, n=3, g=64):
+    def student(self, n=7, g=82):
         self.slave = Toplevel(self.root)
         self.slave.title('Student')
         self.slave.focus_set()
         self.slave.minsize(300, 100)
         self.slave.maxsize(300, 100)
         self.slave.wm_geometry("+600+250")
-        Label(self.slave, text='Бровченко Анастасія\n'
-                               'група ІО-64\n'
+        Label(self.slave, text='Гусакова Вікторія\n'
+                               'група ІВ-82\n'
                                'варіант {}'.format((n + g % 60) % 30 + 1),
               justify=LEFT, font="Arial 17 bold").pack(fill='both')
 
@@ -136,7 +137,7 @@ class Lab2:
         lb = Label(lf3, text='A = {}\n'
                              'B = {}\n'.format(self.A, self.B), font='Arial 14', justify=LEFT)
         lb.grid(row=6, column=0, columnspan=5, sticky=W)
-        A = self.A;
+        A = self.A
         B = self.B
 
     def window3(self):
@@ -144,41 +145,8 @@ class Lab2:
         self.slave3.title('Window3')
         self.slave3.focus_set()
 
-        def A_cholovik_B():
-            a = set()
-            for i in self.A:
-                if i in self.men:
-                    a.add(i)
-            b = set()
-            for j in self.B:
-                if j in self.women:
-                    b.add(j)
-            S = []
-            for i in range(min(len(a), len(b))):
-                p = random.choice(list(a))
-                q = random.choice(list(b))
-                S.append([p, q])
-                a.remove(p)
-                b.remove(q)
-            return S
-
-        def A_onuk_B():
-            a = set()
-            for i in self.A:
-                if i in self.men:
-                    a.add(i)
-            b = self.B
-            R = []
-            for i in range(min(len(a), len(b))):
-                p = random.choice(list(a))
-                q = random.choice(list(b))
-                if [p, q] not in self.S:
-                    if [p, q] not in R:
-                        R.append([p, q])
-            return R
-
-        self.S = A_cholovik_B()
-        self.R = A_onuk_B()
+        self.S = copy.deepcopy(vidn.a_father_b(self.A, self.B, self.men, self.women))
+        self.R = copy.deepcopy(vidn.a_father_in_law_b(self.A, self.B, self.men))
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)
@@ -205,14 +173,14 @@ class Lab2:
         canvS = Canvas(self.slave3, width=600, height=200)
         dict_SA = {}
         dict_SB = {}
-        canvS.create_text(160, 30, text='Множина aSb, якщо a чоловік b', font='Arial 16')
+        canvS.create_text(160, 30, text='Множина aSb, якщо a батько b', font='Arial 16')
         for i in range(len(self.A)):
             canvS.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-            canvS.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+            canvS.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
             dict_SA.update({list(self.A)[i]: [30 + i * 50, 80]})
         for j in range(len(self.B)):
             canvS.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-            canvS.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+            canvS.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
             dict_SB.update({list(self.B)[j]: [30 + j * 50, 160]})
         for k in self.S:
             canvS.create_line(dict_SA[k[0]], dict_SB[k[1]], arrow=LAST)
@@ -221,14 +189,14 @@ class Lab2:
         canvR = Canvas(self.slave3, width=600, height=200)
         dict_RA = {}
         dict_RB = {}
-        canvR.create_text(160, 30, text='Множина aRb, якщо a онук b', font='Arial 16')
+        canvR.create_text(160, 30, text='Множина aRb, якщо a тесть b', font='Arial 16')
         for i in range(len(self.A)):
             canvR.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-            canvR.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+            canvR.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
             dict_RA.update({list(self.A)[i]: [30 + i * 50, 80]})
         for j in range(len(self.B)):
             canvR.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-            canvR.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+            canvR.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
             dict_RB.update({list(self.B)[j]: [30 + j * 50, 160]})
         for k in self.R:
             canvR.create_line(dict_RA[k[0]], dict_RB[k[1]], arrow=LAST)
@@ -249,11 +217,11 @@ class Lab2:
             V = self.R + self.S
             for i in range(len(self.A)):
                 canv.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
                 dict_b1.update({list(self.A)[i]: [30 + i * 50, 80]})
             for j in range(len(self.B)):
                 canv.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
                 dict_b2.update({list(self.B)[j]: [30 + j * 50, 160]})
             for k in V:
                 canv.create_line(dict_b1[k[0]], dict_b2[k[1]], arrow=LAST)
@@ -270,11 +238,11 @@ class Lab2:
 
             for i in range(len(self.A)):
                 canv.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
                 dict_b1.update({list(self.A)[i]: [30 + i * 50, 80]})
             for j in range(len(self.B)):
                 canv.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
                 dict_b2.update({list(self.B)[j]: [30 + j * 50, 160]})
 
             for k in V:
@@ -293,11 +261,11 @@ class Lab2:
 
             for i in range(len(self.A)):
                 canv.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
                 dict_b1.update({list(self.A)[i]: [30 + i * 50, 80]})
             for j in range(len(self.B)):
                 canv.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
                 dict_b2.update({list(self.B)[j]: [30 + j * 50, 160]})
             for k in V:
                 canv.create_line(dict_b1[k[0]], dict_b2[k[1]], arrow=LAST)
@@ -308,15 +276,7 @@ class Lab2:
             dict_b1 = {}
             dict_b2 = {}
 
-            V = []
-            a = set()
-            for i in self.A:
-                if i in self.men:
-                    a.add(i)
-            b = copy.deepcopy(self.B)
-            for i in a:
-                for j in b:
-                    V.append([i, j])
+            V = copy.deepcopy(vidn.a_universal_father_in_law_b(self.A, self.B, self.men))
 
             for i in V:
                 if i in self.R:
@@ -324,11 +284,11 @@ class Lab2:
 
             for i in range(len(self.A)):
                 canv.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
                 dict_b1.update({list(self.A)[i]: [30 + i * 50, 80]})
             for j in range(len(self.B)):
                 canv.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
                 dict_b2.update({list(self.B)[j]: [30 + j * 50, 160]})
             for k in V:
                 if len(V) != 0:
@@ -344,11 +304,11 @@ class Lab2:
                 i[0], i[1] = i[1], i[0]
             for i in range(len(self.A)):
                 canv.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
                 dict_b1.update({list(self.A)[i]: [30 + i * 50, 80]})
             for j in range(len(self.B)):
                 canv.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="orange")
                 dict_b2.update({list(self.B)[j]: [30 + j * 50, 160]})
             for k in V:
                 canv.create_line(dict_b2[k[0]], dict_b1[k[1]], arrow=LAST)
@@ -371,5 +331,5 @@ class Lab2:
         canv.grid(row=1, column=3, rowspan=6)
 
 
-Nastya = Lab2()
-Nastya.mainwindow()
+Wika = Lab2()
+Wika.mainwindow()
