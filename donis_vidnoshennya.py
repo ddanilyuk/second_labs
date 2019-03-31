@@ -28,6 +28,25 @@ def a_husbend_b(A, B, mens, women):
     return S
 
 
+def a_mother_b(A, B, women_1):
+    womenset_1 = set()
+    for i in A:
+        if i in women_1:
+            womenset_1.add(i)
+    womenset_2 = set()
+    for i in B:
+        if i in women_1:
+            womenset_2.add(i)
+    S = []
+    for i in range(min(len(womenset_1), len(womenset_2))):
+        m = random.choice(list(womenset_1))
+        w = random.choice(list(womenset_2))
+        S.append([m, w])
+        womenset_1.remove(m)
+        womenset_2.remove(w)
+    return S
+
+
 def a_father_in_law_b(A, B, mens):
     mensetA = set()
     for i in A:
@@ -68,7 +87,7 @@ def a_universal_father_in_law_b(A, B, mens):
 
 # print(a_husbend_b())
 # print(a_father_in_law_b())
-
+"""
 Ur = list(a_universal_father_in_law_b())
 print("Ur > ", a_universal_father_in_law_b())
 S = list(a_husbend_b())
@@ -76,7 +95,7 @@ print(S)
 R = list(a_father_in_law_b())
 print(R)
 
-
+"""
 def unionn(s, r):
     U = []
     for i in s:
@@ -87,7 +106,7 @@ def unionn(s, r):
     return U
 
 
-print(unionn(R, S))
+#print(unionn(R, S))
 
 
 # print(S)
@@ -102,7 +121,7 @@ def intersectionn(s, r):
     return I
 
 
-print(intersectionn(R, S))
+#print(intersectionn(R, S))
 
 
 def differ(r, s):
@@ -113,7 +132,7 @@ def differ(r, s):
     return D
 
 
-print(differ(R, S))
+#print(differ(R, S))
 
 
 def transposed(s):
@@ -123,5 +142,5 @@ def transposed(s):
     return T
 
 
-print(transposed(S))
-print(differ(Ur, R))
+#print(transposed(S))
+#5print(differ(Ur, R))

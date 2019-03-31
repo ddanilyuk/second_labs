@@ -1,5 +1,6 @@
 from tkinter import *
 import pickle, random, copy
+import donis_vidnoshennya as vidn
 
 
 class Lab2:
@@ -144,7 +145,7 @@ class Lab2:
         self.slave3 = Toplevel(self.root)
         self.slave3.title('Window3')
         self.slave3.focus_set()
-
+        '''
         def A_cholovik_B():
             a = set()
             for i in self.A:
@@ -177,9 +178,14 @@ class Lab2:
                     if [p, q] not in R:
                         R.append([p, q])
             return R
+        
 
         self.R = A_onuk_B()
         self.S = A_cholovik_B()
+        '''
+        self.S = vidn.a_mother_b(self.A, self.B, self.women)
+        self.R = vidn.a_mother_b(self.A, self.B, self.women)
+
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)
