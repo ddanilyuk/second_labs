@@ -179,9 +179,9 @@ class Lab2:
                     if [p, q] not in R:
                         R.append([p, q])
             return R
-"""
-        self.S = vidn.a_husbend_b()
-        self.R = vidn.a_father_in_law_b()
+        """
+        self.S = vidn.a_husbend_b(self.A, self.B, self.men, self.women)
+        self.R = vidn.a_father_in_law_b(self.A, self.B, self.men)
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)

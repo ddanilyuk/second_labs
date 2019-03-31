@@ -68,7 +68,7 @@ def a_universal_father_in_law_b(A, B, mens):
 
 # print(a_husbend_b())
 # print(a_father_in_law_b())
-
+"""
 Ur = list(a_universal_father_in_law_b())
 print("Ur > ", a_universal_father_in_law_b())
 S = list(a_husbend_b())
@@ -76,7 +76,7 @@ print(S)
 R = list(a_father_in_law_b())
 print(R)
 
-
+"""
 def unionn(s, r):
     U = []
     for i in s:
@@ -87,7 +87,7 @@ def unionn(s, r):
     return U
 
 
-print(unionn(R, S))
+#print(unionn(R, S))
 
 
 # print(S)
@@ -102,7 +102,7 @@ def intersectionn(s, r):
     return I
 
 
-print(intersectionn(R, S))
+#print(intersectionn(R, S))
 
 
 def differ(r, s):
@@ -113,7 +113,7 @@ def differ(r, s):
     return D
 
 
-print(differ(R, S))
+#print(differ(R, S))
 
 
 def transposed(s):
@@ -123,5 +123,5 @@ def transposed(s):
     return T
 
 
-print(transposed(S))
-print(differ(Ur, R))
+#print(transposed(S))
+#5print(differ(Ur, R))
