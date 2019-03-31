@@ -7,13 +7,8 @@ class Lab2:
     B = set()
 
     def __init__(self):
-        self.slave4 = Toplevel(self.root)
-        self.slave3 = Toplevel(self.root)
         self.men = ['Андрій', 'Антон', 'Денис', 'Богдан', 'Віталій', 'Віктор', 'Костя', 'Сергій', 'Вова']
         self.women = ['Настя', 'Маша', 'Аня', 'Катя', 'Юля', 'Даша', 'Оля', 'Люда']
-        self.slave2 = Toplevel(self.root)
-        self.root = Tk()
-        self.slave = Toplevel(self.root)
 
     def student(self, n=8, g=82):
         self.slave.title('Student')
@@ -27,6 +22,8 @@ class Lab2:
               justify=LEFT, font="Arial 17 bold").pack(fill='both')
 
     def mainwindow(self):
+        self.root = Tk()
+        self.slave = Toplevel(self.root)
         self.root.title('Window1')
         self.root.minsize(500, 200)
         self.root.maxsize(500, 200)
@@ -48,6 +45,7 @@ class Lab2:
         self.A = set()
         self.B = set()
 
+        self.slave2 = Toplevel(self.root)
         self.slave2.title('Window2')
         self.slave2.focus_set()
 
@@ -139,10 +137,11 @@ class Lab2:
         lb = Label(lf3, text='A = {}\n'
                              'B = {}\n'.format(self.A, self.B), font='Arial 14', justify=LEFT)
         lb.grid(row=6, column=0, columnspan=5, sticky=W)
-        A = self.A;
+        A = self.A
         B = self.B
 
     def window3(self):
+        self.slave3 = Toplevel(self.root)
         self.slave3.title('Window3')
         self.slave3.focus_set()
 
@@ -237,6 +236,7 @@ class Lab2:
         canvR.grid(row=3, column=0, columnspan=3)
 
     def window4(self):
+        self.slave4 = Toplevel(self.root)
         self.slave4.title('Window4')
         self.slave4.focus_set()
         self.slave4.minsize(700, 300)
