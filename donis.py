@@ -150,7 +150,7 @@ class Lab2:
 
 
         # для S
-        self.S = vidn.a_mother_b(self.A, self.B, self.women)
+        self.S = copy.deepcopy(vidn.a_mother_b(self.A, self.B, self.women))
 
         # для R
         def a_granddaughter_b():
@@ -176,7 +176,7 @@ class Lab2:
                     womenset_2.remove(w)
 
             return R
-        self.R = a_granddaughter_b()
+        self.R = copy.deepcopy(a_granddaughter_b())
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)
@@ -306,27 +306,18 @@ class Lab2:
             dict_b1 = {}
             dict_b2 = {}
 
-            V = []
-            a = set()
-            for i in self.A:
-                if i in self.men:
-                    a.add(i)
-            b = copy.deepcopy(self.B)
-            for i in a:
-                for j in b:
-                    V.append([i, j])
-
+            V = copy.deepcopy(vidn.a_universal_granddaughter_b(self.A, self.B, self.women))
             for i in V:
                 if i in self.R:
                     V.remove(i)
 
             for i in range(len(self.A)):
                 canv.create_text(30 + i * 50, 50, text=list(self.A)[i], font='Arial 10')
-                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="green")
+                canv.create_oval([20 + i * 50, 60], [40 + i * 50, 80], fill="yellow")
                 dict_b1.update({list(self.A)[i]: [30 + i * 50, 80]})
             for j in range(len(self.B)):
                 canv.create_text(30 + j * 50, 190, text=list(self.B)[j], font='Arial 10')
-                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="blue")
+                canv.create_oval([20 + j * 50, 160], [40 + j * 50, 180], fill="red")
                 dict_b2.update({list(self.B)[j]: [30 + j * 50, 160]})
             for k in V:
                 if len(V) != 0:

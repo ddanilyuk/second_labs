@@ -40,6 +40,25 @@ def a_universal_father_in_law_b(A, B, mens):
     return Ur
 
 
+def a_universal_granddaughter_b(A, B, women_1):
+    womenset_1 = set()
+    for i in A:
+        if i in women_1:
+            womenset_1.add(i)
+    womenset_2 = set()
+    for i in B:
+        if i in women_1:
+            womenset_2.add(i)
+    Ur = []
+
+    for m1 in womenset_1:
+        for m2 in womenset_2:
+            if m1 != m2:
+                Ur.append([m1, m2])
+
+
+    return Ur
+
 # print(a_husbend_b())
 # print(a_father_in_law_b())
 """
