@@ -1,6 +1,8 @@
 from tkinter import *
 import pickle, random, copy
 import donis_vidnoshennya as vidn
+global some_list
+
 
 
 class Lab2:
@@ -145,47 +147,36 @@ class Lab2:
         self.slave3 = Toplevel(self.root)
         self.slave3.title('Window3')
         self.slave3.focus_set()
-        '''
-        def A_cholovik_B():
-            a = set()
-            for i in self.A:
-                if i in self.men:
-                    a.add(i)
-            b = set()
-            for j in self.B:
-                if j in self.women:
-                    b.add(j)
-            S = []
-            for i in range(min(len(a), len(b))):
-                p = random.choice(list(a))
-                q = random.choice(list(b))
-                S.append([p, q])
-                a.remove(p)
-                b.remove(q)
-            return S
 
-        def A_onuk_B():
-            a = set()
-            for i in self.A:
-                if i in self.men:
-                    a.add(i)
-            b = self.B
-            R = []
-            for i in range(min(len(a), len(b))):
-                p = random.choice(list(a))
-                q = random.choice(list(b))
-                if [p, q] not in self.S:
-                    if [p, q] not in R:
-                        R.append([p, q])
-            return R
-        
 
-        self.R = A_onuk_B()
-        self.S = A_cholovik_B()
-        '''
+        # для S
         self.S = vidn.a_mother_b(self.A, self.B, self.women)
-        self.R = vidn.a_mother_b(self.A, self.B, self.women)
 
+        # для R
+        def a_granddaughter_b():
+            womenset_1 = set()
+            for i in A:
+                if i in self.women:
+                    womenset_1.add(i)
+            womenset_2 = set()
+            for i in B:
+                if i in self.women:
+                    womenset_2.add(i)
+            R = []
+            lists = []
+            for i in range(len(self.S)):
+                lists.append(self.S[i][1])
+            for i in range(min(len(womenset_1), len(womenset_2))):
+                m = random.choice(list(womenset_1))
+                w = random.choice(list(womenset_2))
+
+                if (w not in lists) and (m != w):
+                    R.append([m, w])
+                    womenset_1.remove(m)
+                    womenset_2.remove(w)
+
+            return R
+        self.R = a_granddaughter_b()
 
         lf1 = LabelFrame(self.slave3, text='A', font='Arial 12')
         lf1.grid(row=0, column=0)

@@ -1,32 +1,4 @@
 import random
-"""
-A = ['Andrew', 'Антон', 'Денис', 'Аня', 'Катя', 'Юля']
-B = ['Богдан', 'Віталій', 'Юля', 'Даша', 'Оля']
-S1 = {("Петро", "Ольга"), ("Іван", "Тетяна"), ("Олег", "Оксана")}
-
-mens = ['Andrew', 'Антон', 'Денис', 'Богдан', 'Віталій', 'Віктор', 'Костя', 'Сергій', 'Вова']
-women = ['Настя', 'Маша', 'Аня', 'Катя', 'Юля', 'Даша', 'Оля', 'Люда']
-"""
-
-
-def a_husbend_b(A, B, mens, women):
-    menset = set()
-    for i in A:
-        if i in mens:
-            menset.add(i)
-    womenset = set()
-    for i in B:
-        if i in women:
-            womenset.add(i)
-    S = []
-    for i in range(min(len(menset), len(womenset))):
-        m = random.choice(list(menset))
-        w = random.choice(list(womenset))
-        S.append([m, w])
-        menset.remove(m)
-        womenset.remove(w)
-    return S
-
 
 def a_mother_b(A, B, women_1):
     womenset_1 = set()
@@ -41,32 +13,15 @@ def a_mother_b(A, B, women_1):
     for i in range(min(len(womenset_1), len(womenset_2))):
         m = random.choice(list(womenset_1))
         w = random.choice(list(womenset_2))
-        S.append([m, w])
-        womenset_1.remove(m)
-        womenset_2.remove(w)
+        if m != w:
+            S.append([m, w])
+            womenset_1.remove(m)
+            womenset_2.remove(w)
+
     return S
 
 
-def a_father_in_law_b(A, B, mens):
-    mensetA = set()
-    for i in A:
-        if i in mens:
-            mensetA.add(i)
-    mensetB = set()
-    for i in B:
-        if i in mens:
-            mensetB.add(i)
-    R = []
-    for i in range(min(len(mensetA), len(mensetB))):
-        m1 = random.choice(list(mensetA))
-        m2 = random.choice(list(mensetB))
-        if m1 != m2:
-            R.append([m1, m2])
-        mensetA.remove(m1)
-        mensetB.remove(m2)
-    return R
-
-
+# нужно поменять!!!!!!!!
 def a_universal_father_in_law_b(A, B, mens):
     mensetA = set()
     for i in A:
