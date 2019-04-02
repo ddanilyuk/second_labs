@@ -1,8 +1,6 @@
 from tkinter import *
 import pickle, random, copy
 import donis_vidnoshennya as vidn
-global some_list
-
 
 
 class Lab2:
